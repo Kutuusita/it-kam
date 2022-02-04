@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Header from './Header';
-import axios from 'axios';
+import * as axios from 'axios';
 import { connect } from 'react-redux';
 import {setAuthUserData, toggleIsFetching } from './../../redux/auth-reducer';
 
@@ -8,7 +8,7 @@ import {setAuthUserData, toggleIsFetching } from './../../redux/auth-reducer';
 class HeaderContainer extends Component {
 
   componentDidMount() {
-    axios(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
       withCredentials: true
     }).then(resp => {
       if (resp.data.resultCode === 0) {

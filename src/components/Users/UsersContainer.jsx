@@ -11,7 +11,7 @@ class UsersContainer extends Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.toggleIsFetching(true);
-      axios(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(resp => {
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(resp => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(resp.data.items);
         this.props.setTotalUsersCount(resp.data.totalCount);
@@ -22,7 +22,7 @@ class UsersContainer extends Component {
   onPageChanged = (pageNumber) => {
     this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    axios(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(resp => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(resp => {
       this.props.toggleIsFetching(false);
         this.props.setUsers(resp.data.items);
       });
