@@ -1,0 +1,99 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  background-color: #fff;
+  padding: 15px;
+}
+.dialogsItems {
+  border-right: 1px solid #eaeaea;
+}
+.dialogsItems .active{
+  font-weight: bold;
+}
+
+.dialog {
+  margin-bottom: 10px;
+}
+.dialog::before {
+  content: '';
+  display: inline-block;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(119, 119, 119);
+  margin-right: 5px;
+}
+.dialog a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.activeLink {
+  font-weight: bold;
+}
+
+.messages {
+  padding: 0 10px;
+}
+
+.message {
+  margin-bottom: 20px;
+
+  width: 100%;
+  display: grid;
+  justify-items: start;
+  align-items: center;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "a b b b  b b b b  b b b b"
+    "d c c c  c c c c  c c c c";
+}
+
+.message:before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: lightsalmon;
+  margin: 0px 15px;
+  box-shadow: 0 0 10px rgba(155, 102, 102, 0.323);
+  grid-area: a;
+}
+.message.self {
+  justify-items: end;
+  grid-template-areas:
+    "b b b b  b b b b  b b b a"
+    "c c c c  c c c c  c c c d";
+}
+.message .text {
+  border-radius: 20px;
+  border: 1px solid rgb(175, 175, 175);
+  padding: 15px;
+  min-width: 25%;
+  max-width: 60%;
+  grid-area: b;
+}
+
+.message .date {
+  margin: 5px 15px;
+  font-size: 12px;
+  opacity: .8;
+  grid-area: c;
+}
+.addMessage {
+  margin: 40px 15px 0;
+  display: flex;
+}
+.addMessage textarea {
+  width: 100%;
+  flex: 1 1 auto;
+  height: 48px;
+  padding: 5px;
+}
+
+.addMessage button {
+  flex: 1 0 auto;
+  margin-left: auto;
+  display: block;
+  padding: 14px 40px;
+}

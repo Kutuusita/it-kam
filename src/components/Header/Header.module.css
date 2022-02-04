@@ -1,0 +1,30 @@
+
+.header {
+  grid-area: h;
+  background-color: #303b44;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  letter-spacing: 3px;
+}
+
+.siteTitle {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.header img {
+  width: 80px;
+}
+
+.loginBlock {
+  font-size: 12px;
+  color: #fff;
+  font-weight: bold;
+}
+.loginBlock a {
+  text-decoration: none;
+  color: inherit;
+}

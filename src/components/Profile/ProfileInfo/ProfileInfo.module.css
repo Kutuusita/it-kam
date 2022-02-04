@@ -1,0 +1,19 @@
+
+.info {
+  background-color: #fff;
+  display: flex;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.description {
+  padding: 10px 20px;
+}
+
+.description ul {
+  padding-left: 20px;
+}
+
+.description p {
+  margin-bottom: 5px;
+}
