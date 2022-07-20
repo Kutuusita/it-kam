@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
-import * as axios from 'axios';
 
 const Users = (props) => {
 
@@ -23,46 +22,42 @@ const Users = (props) => {
               classes = s.selectedPage;
             }
             return (
-              <button
-                  key={p}
-                  id={p}
-                  className={classes}
-                  onClick={() => props.onPageChanged(p) }>{ p }</button>
+              <button key={p} id={p} className={classes}
+                      onClick={() => props.onPageChanged(p) }>
+                        { p }</button>
             );
           })}
         </div>
       </div>
     {
       props.users.map(u => {
-        return <div key={u.id} className={s.item}>
-          <div className={s.avatar}>
-            <span className={s.image}>
-              <NavLink to={`/profile/${u.id}`}>
-                { u.photos.small ? <img src={u.photos.small} alt={u.name}/> : '^_^' }
-              </NavLink>
+        return  <div key={u.id} className={s.item}>
+                  <div className={s.avatar}>
+                    <span className={s.image}>
+                      <NavLink to={`/profile/${u.id}`}>
+                        { u.photos.small ? <img src={u.photos.small} alt={u.name}/> : '^_^' }
+                      </NavLink>
 
-            </span>
-            { u.followed
-                ? <button className={s.followed} onClick={() => {
-                  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`)
-                  return props.unfollow(u.id)
-                }}>Follow</button>
-                : <button className={s.followed} onClick={() => {
-                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, null, {withCredentials: true})
-                      .then(res =>{
-                        if (res.data.resultCode === 0) props.follow(u.id)
-                      })
-                }} >Unfollow</button> }
-          </div>
+                    </span>
+                    { u.followed
+                        ? <button disabled={props.followingInProgress.some( id => id === u.id)}
+                                  className={s.unfollowed}
+                                  onClick={ () => props.unfollow(u.id) }>
+                                    Unfollow</button>
+                        : <button disabled={props.followingInProgress.some( id => id === u.id)}
+                                  className={s.followed}
+                                  onClick={ () => props.follow(u.id) } >
+                                    Follow</button> }
+                  </div>
 
-          <div className={s.info}>
-            <div className={s.name}>
-              <span>{u.name}</span>
-              <span>{"u.location.country"}, <br />{"u.location.city"}</span>
-            </div>
-            <div className={s.status}>{u.status ? u.status : 'u.status'}</div>
-          </div>
-        </div>
+                  <div className={s.info}>
+                    <div className={s.name}>
+                      <span>{u.name}</span>
+                      <span>{"u.location.country"}, <br />{"u.location.city"}</span>
+                    </div>
+                    <div className={s.status}>{u.status ? u.status : 'u.status'}</div>
+                  </div>
+                </div>
       } )
     }
 

@@ -15,7 +15,7 @@
   font-style: italic;
 }
 
-.header img {
+.logo {
   width: 80px;
 }
 
@@ -27,4 +27,18 @@
 .loginBlock a {
   text-decoration: none;
   color: inherit;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.profile img {
+  display: block;
+}
+.profile button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }

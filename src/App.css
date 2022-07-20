@@ -6,6 +6,7 @@
 
 body {
   background-color: #f0f0f0;
+  cursor: default;
 }
 
 .app-wrapper {
@@ -18,6 +19,7 @@ body {
                        "n c";
 
   width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 

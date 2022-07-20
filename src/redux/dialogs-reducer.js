@@ -17,7 +17,6 @@ const initialSatate = {
     {id: 3, message: 'Fine', authorId: 1, date: '08 января 13:34'},
     {id: 4, message: 'By!', authorId: 0, date: '08 января 13:40'},
   ],
-  newMessageText: '',
 };
 
 const dialogsReducer = (state = initialSatate, action) => {
@@ -30,18 +29,12 @@ const dialogsReducer = (state = initialSatate, action) => {
           ...state.messages,
           {
             id: state.messages.length + 2,
-            message: state.newMessageText,
+            message: action.message,
             authorId: 0,
             date: '08 января 13:30'
           }
         ],
-        newMessageText: '',
       };
-    case UPDATE_NEW_MESSAGE_TEXT:
-      return {
-        ...state,
-        newMessageText: action.postMessage,
-       };
     default:
       return state;
   }
@@ -49,6 +42,4 @@ const dialogsReducer = (state = initialSatate, action) => {
 
 export default  dialogsReducer;
 
-export const sendMessageCreater = () => ({'type': SEND_MESSAGE });
-export const updateNewMessageTextCreater = (text) =>
-                ({type: UPDATE_NEW_MESSAGE_TEXT, postMessage: text});
+export const sendMessageCreater = (message) => ({'type': SEND_MESSAGE, message });

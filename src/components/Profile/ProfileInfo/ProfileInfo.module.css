@@ -8,6 +8,7 @@
 
 .description {
   padding: 10px 20px;
+  flex: 1 1 auto;
 }
 
 .description ul {
@@ -16,4 +17,24 @@
 
 .description p {
   margin-bottom: 5px;
+}
+
+.status {
+  margin-bottom: 15px;
+}
+
+.statusText {
+  transition: .3s;
+  margin-left: -5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.statusText:hover {
+  cursor: pointer;
+  background-color: rgba(16, 134, 197, 0.1);
+}
+
+.statusInput {
+  border: 1px solid #666666
 }

@@ -1,44 +1,34 @@
 import Profile from './Profile';
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { setUserProfile, toggleIsFetching } from './../../redux/profile-reducer';
+import { getProfile, getStatus, updateStatus } from './../../redux/profile-reducer';
 import Preloader from '../common/Preloader/Preloader';
-import { useParams } from 'react-router-dom';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
+import { compose } from 'redux';
+import withRouter from '../hoc/withRouter';
 
 
-const withRouter = (WrappedComponent) => (props) => {
-  let {profileId} = useParams();
-  // debugger;
-  return (
-    <WrappedComponent
-    {...props}
-    profileId={profileId}/>
-  )
-}
+const ProfileContainer = props => {
 
-class ProfileContainer extends Component {
-  componentDidMount() {
+  useEffect(() => {
+    let userId = props.profileId || props.loggedUserId;
+    props.getProfile(userId);
+    props.getStatus(userId);
+  }, []);
 
-    this.props.toggleIsFetching(true);
-    let userId = this.props.profileId || 2;
+  if (props.isFatching) return <Preloader />;
+  return <Profile {...props} />;
+};
 
-    axios(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(resp => {
-      this.props.toggleIsFetching(false);
-      this.props.setUserProfile(resp.data);
-    });
-  }
-  render() {
-    if (this.props.isFatching) return <Preloader />
-    return <Profile {...this.props} />;
-  }
-}
-
-const mapStateToProps = ({profilePage: { userProfile, isFatching }}) => ({
-  userProfile,
-  isFatching,
+const mapStateToProps = (state) => ({
+  userProfile: state.profilePage.userProfile,
+  isFatching: state.profilePage.isFatching,
+  loggedUserId: state.auth.id,
+  status: state.profilePage.status
 });
 
-
-
-export default connect(mapStateToProps, { setUserProfile, toggleIsFetching })(withRouter(ProfileContainer))
+export default compose(
+  connect(mapStateToProps, { getProfile, getStatus, updateStatus }),
+  withRouter,
+  withAuthRedirect,
+)(ProfileContainer);
